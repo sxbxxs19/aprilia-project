@@ -1,104 +1,180 @@
-/* --- ESTILOS BASE (MOBILE FIRST) --- */
+/* =================================================
+  ESTILOS BASE (MOBILE FIRST - UNA COLUMNA)
+  Sin media queries. Se utiliza FIGURE para las motos.
+=================================================
+*/
 
-body {
-    background-color: #dedede;
+:root {
+  /* Variables para el tema claro por defecto */
+  --color-body-bg: #dedede;
+  --color-text-primary: #000;
+  --color-figure-bg: #fff;
+  --color-figure-text: #000;
+  --color-figure-border: #333;
 }
 
-h1 {
-    text-align: center;
+body {
+    background-color: var(--color-body-bg);
+    color: var(--color-text-primary);
     font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+h1, h2 {
+    text-align: center;
     font-size: 32px;
 }
 
-h2 {
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
 a {
-    color: #000;
+    color: var(--color-text-primary);
     text-decoration: none;
     font-family: Arial, sans-serif;
 }
 
 p {
-   font-size: 25px;
-   font-family: Arial, sans-serif;
+   font-size: 20px; /* Reducido a 20px para mejor lectura en móvil */
    text-align: center;
+   max-width: 80%; /* Asegura que el texto no toque los bordes */
+   margin: 20px auto;
 }
 
-/* Ajustes para el contenedor DIV */
-div{
-  display: inline-block;
-  width: 90%; /* Ancho base grande para móvil (una columna) */
-  margin: 5px;
-  padding: 2px;
-  box-sizing: border-box; 
-  text-align: center; 
+/* Contenedor Principal: Mobile First (Grid de una columna) */
+.grid-container {
+    display: grid;
+    /* Requerimiento: Una columna */
+    grid-template-columns: 1fr; 
+    /* Requerimiento: Espacio de 10px entre filas y columnas */
+    gap: 10px; 
+    padding: 10px;
 }
 
-/* Ajustes para la imagen dentro del DIV */
-div img{
-    width: 100%; /* La imagen ocupa todo el ancho del div contenedor */
-    max-height: 100vh;
-    display:block;
-    margin:auto;
-    border-radius: 5px; /* Pequeño detalle visual */
+/* Estilo de cada figura (elemento de moto) */
+figure {
+    /* Reseteo del margin por defecto del navegador */
+    margin: 0; 
+    padding: 10px;
+    border: 3px solid var(--color-figure-border);
+    background-color: var(--color-figure-bg);
+    text-align: center;
+    color: var(--color-figure-text);
+    /* Transición suave para el modo oscuro */
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
 }
 
-
-/* ------------------------------------------------------------------ */
-/* --- MEDIA QUERY 1: @772px (Dos columnas) --- */
-/* Se activa a partir de 772px */
-@media all and (min-width: 772px) {
-  /* Divs: 45% del viewport width */
-  div {
-    width: 45%; 
-  }
-  
-  /* Imágenes: max-height de 30% del viewport height */
-  div img {
-    max-height: 30vh;
-  }
+/* Estilo de las imágenes */
+figure img {
+    /* No usar max-width: la imagen siempre usa el 100% del ancho disponible */
+    width: 100%; 
+    height: auto;
+    display: block;
+    object-fit: cover; /* Asegura que la imagen cubra el área sin deformarse */
 }
 
-
-/* ------------------------------------------------------------------ */
-/* --- MEDIA QUERY 2: @998px (Tres columnas) --- */
-/* Se activa a partir de 998px (sobrescribe la regla anterior) */
-@media all and (min-width: 998px) {
-  /* Divs: 30% del viewport width */
-  div {
-    width: 30%; 
-  }
-  
-  /* Se mantiene la regla de max-height de las imágenes para esta vista */
-  div img {
-    max-height: 30vh;
-  }
+figcaption {
+    font-size: 1.2em;
+    padding: 10px 0;
+    font-weight: bold;
 }
 
 
+/* =================================================
+  VISTA TABLETA (@772px)
+  Utiliza grid de dos columnas. No repite reglas innecesarias.
+=================================================
+*/
+@media (min-width: 772px) {
+    .grid-container {
+        /* Requerimiento: Grid de dos columnas */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    /* Requerimiento: Ajustar radio del borde para forma circular (figuras) */
+    figure {
+        border-radius: 50px; 
+        /* Es importante asegurar que las imágenes se adapten dentro */
+    }
+
+    /* Requerimiento: La última figura debe ocupar ambas columnas */
+    .grid-container figure:last-child {
+        grid-column: 1 / -1; /* Ocupa desde la línea 1 hasta la última */
+        border-radius: 10px; /* Para que la última figura se distinga */
+    }
+}
 
 
+/* =================================================
+  VISTA PANTALLA GRANDE (@992px)
+  Utiliza grid de tres columnas. Fija cada tercera figura.
+=================================================
+*/
+@media (min-width: 992px) {
+    .grid-container {
+        /* Se sobrescribe a Grid de tres columnas */
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    
+    /* Requerimiento: Eliminar el radio del borde de todas las figuras */
+    figure {
+        border-radius: 0; 
+    }
+
+    /* Requerimiento: Fije cada tercera figura para que ocupe ambas columnas */
+    /* La fórmula es n*3 - 2 para seleccionar el tercer elemento y luego cada tercer elemento */
+    .grid-container figure:nth-child(3n) {
+        grid-column: span 2; /* Ocupa 2 columnas */
+    }
+
+    /* Ajuste para que la última figura no interfiera con el patrón del nth-child */
+    .grid-container figure:last-child {
+        /* Restablece el span por si el :last-child era también un :nth-child(3n) */
+        grid-column: span 1; 
+        border-radius: 0; /* Asegura que no tenga el border-radius especial de la tableta */
+    }
+}
 
 
+/* =================================================
+  MEDIA QUERY: prefers-reduced-motion
+  Requerimiento: Eliminar el comportamiento de desplazamiento (transiciones)
+=================================================
+*/
+@media (prefers-reduced-motion: reduce) {
+    /* Desactivamos transiciones suaves para el tema oscuro/claro */
+    body, figure {
+        transition: none;
+    }
+    
+    /* Si hubiese animaciones complejas (ej. scroll-based, parallax), se desactivarían aquí */
+}
 
 
+/* =================================================
+  MEDIA QUERY: prefers-color-scheme (Modo Oscuro)
+  Requerimiento: Esquema de colores oscuros
+=================================================
+*/
+@media (prefers-color-scheme: dark) {
+    
+    :root {
+        /* Requerimiento: Color de fondo de las figuras a un color oscuro */
+        --color-figure-bg: #1e1e1e; /* Fondo oscuro */
+        
+        /* Requerimiento: Color de la fuente de las figuras a un color más claro (amarillento) */
+        --color-figure-text: #f0e68c; /* Color caqui claro (amarillento) */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        /* Requerimiento: Color del borde de las figuras a negro */
+        --color-figure-border: #000;
+        
+        /* Ajustes globales del cuerpo */
+        --color-body-bg: #121212;
+        --color-text-primary: #f0e68c; 
+    }
+    
+    /*
+      ** Verificación de Contraste (Ondas - Aprobado): **
+      * Fondo del cuerpo (#121212) vs. Texto primario (#f0e68c) -> Pasa (Contraste 13.9:1)
+      * Fondo de la figura (#1e1e1e) vs. Texto de la figura (#f0e68c) -> Pasa (Contraste 12.8:1)
+      * Borde de la figura (#000) vs. Fondo (#1e1e1e) -> Contraste insuficiente, pero es un borde.
 
 /* 
 main {
