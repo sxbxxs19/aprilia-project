@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Motos Aprilia: Leyendas de Noale</title>
-  <link rel="stylesheet" href="css/style.css"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprilia: Responsive Grid</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -15,41 +16,45 @@
 
   <main>
     <h2>Modelos Destacados</h2>
-    <p>Una muestra de las motos más icónicas y recientes de la marca italiana Aprilia, conocida por su herencia en la competición.</p>
-    
-    <div>
-      <img src="images/aprilia_rsv4.jpg" alt="Aprilia RSV4" width="300">
-      <p class="label">RSV4 (Superbike)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_tuono_v4.jpg" alt="Aprilia Tuono V4" width="300">
-      <p class="label">Tuono V4 (Naked)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_rs660.jpg" alt="Aprilia RS 660" width="300">
-      <p class="label">RS 660 (Sport)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_tuareg660.jpg" alt="Aprilia Tuareg 660" width="300">
-      <p class="label">Tuareg 660 (Adventure)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_shiver900.jpg" alt="Aprilia Shiver 900" width="300">
-      <p class="label">Shiver 900 (Roadster)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_sx125.jpg" alt="Aprilia SX 125" width="300">
-      <p class="label">SX 125 (Supermotard)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_mojito.jpg" alt="Aprilia Mojito" width="300">
-      <p class="label">Mojito (Scooter Clásico)</p>
-    </div>
-    <div>
-      <img src="images/aprilia_dorsoduro.jpg" alt="Aprilia Dorsoduro" width="300">
-      <p class="label">Dorsoduro (Motard)</p>
-    </div>
-    
+    <p>Una muestra de las motos más icónicas y recientes de la marca italiana, con diseño responsive basado en CSS Grid.</p>
+
+    <!-- Contenedor principal para CSS Grid -->
+    <section class="grid-container">
+      
+      <!-- Se utiliza FIGURE y FIGCAPTION para mejor semántica -->
+      <figure>
+        <img src="images/aprilia_rsv4.jpg" alt="Aprilia RSV4" width="300">
+        <figcaption class="label">RSV4 (Superbike)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_tuono_v4.jpg" alt="Aprilia Tuono V4" width="300">
+        <figcaption class="label">Tuono V4 (Naked)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_rs660.jpg" alt="Aprilia RS 660" width="300">
+        <figcaption class="label">RS 660 (Sport)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_tuareg660.jpg" alt="Aprilia Tuareg 660" width="300">
+        <figcaption class="label">Tuareg 660 (Adventure)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_shiver900.jpg" alt="Aprilia Shiver 900" width="300">
+        <figcaption class="label">Shiver 900 (Roadster)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_sx125.jpg" alt="Aprilia SX 125" width="300">
+        <figcaption class="label">SX 125 (Supermotard)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_mojito.jpg" alt="Aprilia Mojito" width="300">
+        <figcaption class="label">Mojito (Scooter Clásico)</figcaption>
+      </figure>
+      <figure>
+        <img src="images/aprilia_dorsoduro.jpg" alt="Aprilia Dorsoduro" width="300">
+        <figcaption class="label">Dorsoduro (Motard)</figcaption>
+      </figure>
+    </section>
   </main>
 
   <footer>
